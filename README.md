@@ -15,7 +15,6 @@
 ### Association
 
 - has_many :items
-- has_many :orders
 - has_many :buys
 
 
@@ -24,7 +23,7 @@
 | Column             | Type       | Option                         |
 | ------------------ | ---------- | ------------------------------ |
 | name               | string     | null: false                    |
-| text               | text       | null: false                    |
+| content            | text       | null: false                    |
 | category_id        | integer    | null: false                    |
 | condition_id       | integer    | null: false                    |
 | shipping_charge_id | integer    | null: false                    |
@@ -37,13 +36,27 @@
 ### Association
 
 - belongs_to :user
-- has_one :order
 - has_one :buy
 - belongs_to :category
 - belongs_to :condition
 - belongs_to :shipping_charge
 - belongs_to :prefecture
 - belongs_to :days_to_ship
+
+
+## buysテーブル
+
+| Column | Type       | Option                         |
+|--------|------------|--------------------------------|
+| user   | references | null: false, foreign_key: true |
+| item   | references | null: false, foreign_key: true |
+
+
+### Association
+
+- belongs_to :user
+- belongs_to :item
+- has_one :order
 
 
 ## ordersテーブル
@@ -56,27 +69,10 @@
 | address        | string     | null: false                    |
 | building_name  | string     |                                |
 | phone_number   | string     | null: false                    |
+| buy            | references | null: false, foreign_key: true |
 
 
 ### Association
 
-- belongs_to :user
-- belongs_to :item
-- has_one :buy
+- belongs_to :buy
 - belongs_to :prefecture
-
-
-## buysテーブル
-
-| Column | Type       | Option                         |
-|--------|------------|--------------------------------|
-| user   | references | null: false, foreign_key: true |
-| item   | references | null: false, foreign_key: true |
-| order  | references | null: false, foreign_key: true |
-
-
-### Association
-
-- belongs_to :user
-- belongs_to :item
-- belongs_to :order
