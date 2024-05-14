@@ -76,6 +76,10 @@ Style/SymbolArray:
 Style/FrozenStringLiteralComment:
  Enabled: false
 
+#Windowsの改行コードを変更 
+Style/EndOfLine: 
+  EnforcedStyle: lf
+
 # メソッドパラメータ名の最小文字数を設定
 Naming/MethodParameterName:
  MinNameLength: 1
