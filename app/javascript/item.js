@@ -9,8 +9,8 @@
       const addTaxPriceVal = itemPriceVal * 0.1;
       const profitVal = itemPriceVal - addTaxPriceVal
       
-      addTaxPrice.textContent = `${Math.trunc(addTaxPriceVal)}`;
-      profit.textContent = `${Math.trunc(profitVal)}`;
+      addTaxPrice.textContent = `${Math.floor(addTaxPriceVal)}`;
+      profit.textContent = `${Math.floor(profitVal)}`;
     });
   });
 });
