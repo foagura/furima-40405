@@ -1,6 +1,7 @@
 class ItemsController < ApplicationController
-  before_action :authenticate_user!, only: :new
+  before_action :authenticate_user!, only: [:new, :edit]
   before_action :set_item, only: [:show, :edit, :update]
+  before_action :user_confirmation, only: :edit
 
   def index
     @items = Item.all.order(created_at: :desc)
@@ -29,7 +30,6 @@ class ItemsController < ApplicationController
     if @item.update(item_params)
       redirect_to root_path
     else
-      
       render :edit, status: :unprocessable_entity
     end
   end
@@ -43,5 +43,12 @@ class ItemsController < ApplicationController
 
   def set_item
     @item = Item.find(params[:id])
+  end
+
+  def user_confirmation
+    item = Item.find(params[:id])
+    unless current_user.id == item.user.id
+      redirect_to root_path
+    end
   end
 end
