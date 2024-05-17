@@ -47,8 +47,8 @@ class ItemsController < ApplicationController
 
   def user_confirmation
     item = Item.find(params[:id])
-    unless current_user.id == item.user.id
-      redirect_to root_path
-    end
+    return if current_user.id == item.user.id
+
+    redirect_to root_path
   end
 end
