@@ -11,10 +11,10 @@ class OrdersController < ApplicationController
   end
 
   def create
-    buy_order = BuyOrder.new(order_params)
-    if buy_order.valid?
+    @buy_order = BuyOrder.new(order_params)
+    if @buy_order.valid?
       pay_item
-      buy_order.save
+      @buy_order.save
       redirect_to root_path
     else
       gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
