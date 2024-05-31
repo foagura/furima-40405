@@ -65,6 +65,11 @@ RSpec.describe BuyOrder, type: :model do
         @buy_order.valid?
         expect(@buy_order.errors.full_messages).to include("Phone number 10~11桁の半角数字で入力してください")
       end
+      it 'tokenが空だと登録できない' do
+        @buy_order.token = ""
+        @buy_order.valid?
+        expect(@buy_order.errors.full_messages).to include("Token can't be blank")
+      end
     end
 
   end

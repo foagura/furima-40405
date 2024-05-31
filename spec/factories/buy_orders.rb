@@ -6,5 +6,6 @@ FactoryBot.define do
     address {rand(1..9)}
     building_name {"TESTビル"}
     phone_number {Faker::Number.leading_zero_number(digits: 11)}
+    token {Faker::Crypto.md5}
   end
 end
