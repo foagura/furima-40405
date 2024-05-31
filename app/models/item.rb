@@ -1,6 +1,7 @@
 class Item < ApplicationRecord
   belongs_to :user
   has_one_attached :image
+  has_one :buy
 
   with_options presence: true do
     validates :name, :content, :image
@@ -8,7 +9,7 @@ class Item < ApplicationRecord
 
   validates :price, presence: true, numericality: { in: 300..9_999_999, only_integer: true }
 
-  with_options numericality: { other_than: 1, message: "can't bo blank" } do
+  with_options numericality: { other_than: 1, message: "can't be blank" } do
     validates :category_id, :condition_id, :shipping_charge_id, :prefecture_id, :days_to_ship_id
   end
 
