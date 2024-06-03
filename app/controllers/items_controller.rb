@@ -4,7 +4,6 @@ class ItemsController < ApplicationController
   before_action :user_confirmation, only: [:edit, :destroy]
   before_action :order_confirmation, only: :edit
 
-
   def index
     @items = Item.all.order(created_at: :desc)
   end
@@ -54,15 +53,15 @@ class ItemsController < ApplicationController
 
   def user_confirmation
     item = Item.find(params[:id])
-    unless current_user.id == item.user.id
-      redirect_to root_path
-    end
+    return if current_user.id == item.user.id
+
+    redirect_to root_path
   end
 
   def order_confirmation
     item = Item.find(params[:id])
-    if item.buy.present?
-      redirect_to root_path
-    end
+    return unless item.buy.present?
+
+    redirect_to root_path
   end
 end
